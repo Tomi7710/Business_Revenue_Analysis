@@ -1,2 +1,2 @@
 # Sales-Insights-Project
-Data Cleaning and Data Exploration using SQL
+Performed data cleaning using SQL on sales data and conducted data exploration to derive insights related to business revenue.
