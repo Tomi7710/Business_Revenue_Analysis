@@ -1,3 +1,3 @@
-### Revenue Insights Analytics
-Analysed sales data to identify revenue growth opportunities and key business drivers. 
+#### Sales Performance Analysis
+Analysed sales data to identify customer behaviour and purchasing patterns, uncovering revenue growth opportunities and key business drivers. 
 
