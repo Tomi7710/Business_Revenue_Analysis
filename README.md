@@ -61,7 +61,7 @@ WHERE customer_code IN (
       SELECT transactions.customer_code
       FROM transactions
       WHERE transactions.sales_qty > 100);
-```sql
+```
 
 #### Key Insights
 - Revenue varies significantly across regions and years
