@@ -4,7 +4,7 @@
 This project analyzes sales data using SQL to understand business performance. 
 
 #### Key Metrics
-Overall revenue trend, sales quantity, market performance, top-performing products and regions as well as key customers.
+Overall revenue trends, sales quantity, market performance, top-performing products and regions as well as key customers.
 
 #### Tools & Skills
 - SQL for data extraction and analysis (SELECT, JOIN, GROUP BY, ORDER BY, aggregate functions, subqueries)
@@ -12,7 +12,7 @@ Overall revenue trend, sales quantity, market performance, top-performing produc
 - Business performance and trend analysis (Revenue tracking, performance evaluation, growth insights)
 
 #### Objectives
-- Calculate total revenue and average sales
+- Identify total revenue and average sales
 - Find top customers and best-selling products
 - Track yearly and regional revenue trends
 
@@ -25,31 +25,44 @@ Overall revenue trend, sales quantity, market performance, top-performing produc
 
 #### Sample SQL Queries
 -- Total revenue by region
-SELECT region, SUM(sales_amount) AS total_revenue
-FROM sales_data
-GROUP BY region
-ORDER BY total_revenue DESC;
+SELECT SUM(sales_amount) AS total_revenue, markets.zone
+FROM transactions
+JOIN markets
+ON transactions.market_code = markets.markets_code
+GROUP BY zone;
 
--- Top 10 customers by total purchases
-SELECT customer_id, SUM(sales_amount) AS total_spent
-FROM sales_data
-GROUP BY customer_id
-ORDER BY total_spent DESC
-LIMIT 10;
+-- Yearly revenue trends
+SELECT SUM(sales_amount) AS total_revenue, date.year
+FROM transactions
+JOIN date
+ON transactions.order_date = date.date
+GROUP BY year;
 
--- Monthly revenue trend
-SELECT EXTRACT(YEAR FROM sales_date) AS year,
-       EXTRACT(MONTH FROM sales_date) AS month,
-       SUM(sales_amount) AS monthly_revenue
-FROM sales_data
-GROUP BY year, month
-ORDER BY year, month;
+-- Number of customers per year
+SELECT COUNT(customer_code) AS number_of_customers, date.year
+FROM transactions
+JOIN DATE 
+ON transactions.order_date = date.date
+GROUP BY year;
+
+-- Top performing market
+SELECT markets_name, zone, order_date, sales_qty, sales_amount
+FROM transactions
+JOIN markets
+ON markets.markets_code = transactions.market_code
+ORDER BY sales_amount DESC;
+
+-- Top customers by total purchases
+SELECT custmer_name, customer_type
+FROM customers
+WHERE customer_code IN (
+      SELECT transactions.customer_code
+      FROM transactions
+      WHERE transactions.sales_qty > 100);
 
 #### Key Insights
-- Top customers and products drive most of the revenue
-- Certain regions show strong seasonal patterns
-- Monthly analysis helps forecast future sales
+- Revenue varies significantly across regions and years
 - Identified regions with the highest and lowest revenue contributions
-- Recognized top customer segments and their purchasing patterns
-- Determined seasonal and monthly trends that influence overall revenue
-- Highlighted actionable insights for improving sales and targeting marketing efforts
+- Recognized top customers and their purchasing patterns
+- Top customers and products drive most of the revenue
+  
