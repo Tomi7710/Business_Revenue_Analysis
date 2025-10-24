@@ -24,6 +24,7 @@ Overall revenue trends, sales quantity, market performance, top-performing produ
 - Top 5 customers by revenue
 
 #### Sample SQL Queries
+
 -- Total revenue by region
 ```sql
 SELECT SUM(sales_amount) AS total_revenue, markets.zone
@@ -63,7 +64,7 @@ FROM customers
 WHERE customer_code IN (
       SELECT transactions.customer_code
       FROM transactions
-      WHERE transactions.sales_qty > 100);
+      WHERE transactions.sales_qty > 100)
 
 #### Key Insights
 - Revenue varies significantly across regions and years
