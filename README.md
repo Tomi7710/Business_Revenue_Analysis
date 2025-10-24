@@ -34,7 +34,6 @@ ON transactions.market_code = markets.markets_code
 GROUP BY zone;
 
 -- Yearly revenue trends
-```sql
 SELECT SUM(sales_amount) AS total_revenue, date.year
 FROM transactions
 JOIN date
@@ -42,7 +41,6 @@ ON transactions.order_date = date.date
 GROUP BY year;
 
 -- Number of customers per year
-```sql
 SELECT COUNT(customer_code) AS number_of_customers, date.year
 FROM transactions
 JOIN DATE 
@@ -50,7 +48,6 @@ ON transactions.order_date = date.date
 GROUP BY year;
 
 -- Top performing market
-```sql
 SELECT markets_name, zone, order_date, sales_qty, sales_amount
 FROM transactions
 JOIN markets
@@ -58,7 +55,6 @@ ON markets.markets_code = transactions.market_code
 ORDER BY sales_amount DESC;
 
 -- Top customers by total purchases
-```sql
 SELECT custmer_name, customer_type
 FROM customers
 WHERE customer_code IN (
